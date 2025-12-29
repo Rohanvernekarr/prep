@@ -7,6 +7,7 @@ Built a dynamic filtering system for categories and real-time sorting for Nutrit
 I implemented a "Load More" stratege to provide  better ux.
 responsive for all type of screens.
 used react hooks for state management because of this small scale app.
+i took 2 days to build this with all the logic.
 
 ## Getting Started
 
