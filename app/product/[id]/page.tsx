@@ -42,19 +42,19 @@ export default async function ProductPage({ params }: PageProps) {
 
       <div className="grid gap-8 lg:grid-cols-2">
         <div className="space-y-6">
-          <div className="relative aspect-square overflow-hidden rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm">
+          <div className="relative aspect-square overflow-hidden rounded-3xl border border-zinc-100 bg-white p-6 md:p-12 shadow-2xl shadow-zinc-200/50">
              {product.image_url ? (
                 <img
                   src={product.image_url}
                   alt={product.product_name}
-                  className="h-full w-full object-contain mix-blend-multiply"
+                  className="h-full w-full object-contain mix-blend-multiply hover:scale-105 transition-transform duration-700"
                 />
              ) : (
-                <div className="flex h-full w-full items-center justify-center bg-zinc-100 text-zinc-400">
-                  No Image
+                <div className="flex h-full w-full items-center justify-center bg-zinc-50 text-zinc-300">
+                  <span className="text-xl">No Image Available</span>
                 </div>
              )}
-            <div className={`absolute top-4 right-4 flex h-16 w-16 items-center justify-center rounded-full text-2xl font-bold text-white shadow-md ring-4 ring-white ${gradeColors[grade] || gradeColors['?']}`}>
+            <div className={`absolute top-6 right-6 flex h-16 w-16 items-center justify-center rounded-full text-3xl font-bold text-white shadow-xl ring-4 ring-white backdrop-blur-sm ${gradeColors[grade] || gradeColors['?']}`}>
               {grade}
             </div>
           </div>
@@ -115,47 +115,47 @@ export default async function ProductPage({ params }: PageProps) {
             <CardHeader>
               <CardTitle>Nutrition Facts</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-6">
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="border-b border-zinc-100">
-                      <th className="py-2 text-left font-medium text-zinc-700">Nutrient</th>
-                      <th className="py-2 text-right font-medium text-zinc-700">Per 100g</th>
+                    <tr className="border-b border-zinc-200">
+                      <th className="py-3 text-left font-semibold text-zinc-900">Nutrient</th>
+                      <th className="py-3 text-right font-semibold text-zinc-900">Per 100g</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr className="border-b border-zinc-100">
-                      <td className="py-2 text-zinc-600">Energy</td>
-                      <td className="py-2 text-right text-zinc-900">{product.nutriments?.["energy-kcal_100g"] || product.nutriments?.["energy-kcal"] || 0} kcal</td>
+                  <tbody className="divide-y divide-zinc-100">
+                    <tr className="group hover:bg-zinc-50/50 transition-colors">
+                      <td className="py-3 font-medium text-zinc-700">Energy</td>
+                      <td className="py-3 text-right font-bold text-zinc-900">{product.nutriments?.["energy-kcal_100g"] || product.nutriments?.["energy-kcal"] || 0} kcal</td>
                     </tr>
-                    <tr className="border-b border-zinc-100">
-                      <td className="py-2 text-zinc-600">Fat</td>
-                      <td className="py-2 text-right text-zinc-900">{product.nutriments?.fat_100g || 0} g</td>
+                    <tr className="group hover:bg-zinc-50/50 transition-colors">
+                      <td className="py-3 text-zinc-600">Fat</td>
+                      <td className="py-3 text-right text-zinc-700">{product.nutriments?.fat_100g || 0} g</td>
                     </tr>
-                    <tr className="border-b border-zinc-100">
-                      <td className="py-2 pl-4 text-zinc-400">Saturated Fat</td>
-                      <td className="py-2 text-right text-zinc-400">{product.nutriments?.["saturated-fat_100g"] || 0} g</td>
+                    <tr className="group hover:bg-zinc-50/50 transition-colors">
+                      <td className="py-3 pl-6 text-zinc-500 italic">Saturated Fat</td>
+                      <td className="py-3 text-right text-zinc-500">{product.nutriments?.["saturated-fat_100g"] || 0} g</td>
                     </tr>
-                    <tr className="border-b border-zinc-100">
-                      <td className="py-2 text-zinc-600">Carbohydrates</td>
-                      <td className="py-2 text-right text-zinc-900">{product.nutriments?.carbohydrates_100g || 0} g</td>
+                    <tr className="group hover:bg-zinc-50/50 transition-colors">
+                      <td className="py-3 text-zinc-600">Carbohydrates</td>
+                      <td className="py-3 text-right text-zinc-700">{product.nutriments?.carbohydrates_100g || 0} g</td>
                     </tr>
-                    <tr className="border-b border-zinc-100">
-                      <td className="py-2 pl-4 text-zinc-400">Sugars</td>
-                      <td className="py-2 text-right text-zinc-400">{product.nutriments?.sugars_100g || 0} g</td>
+                    <tr className="group hover:bg-zinc-50/50 transition-colors">
+                      <td className="py-3 pl-6 text-zinc-500 italic">Sugars</td>
+                      <td className="py-3 text-right text-zinc-500">{product.nutriments?.sugars_100g || 0} g</td>
                     </tr>
-                    <tr className="border-b border-zinc-100">
-                      <td className="py-2 text-zinc-600">Proteins</td>
-                      <td className="py-2 text-right text-zinc-900">{product.nutriments?.proteins_100g || 0} g</td>
+                    <tr className="group hover:bg-zinc-50/50 transition-colors">
+                      <td className="py-3 text-zinc-600">Proteins</td>
+                      <td className="py-3 text-right text-zinc-700">{product.nutriments?.proteins_100g || 0} g</td>
                     </tr>
-                    <tr className="border-b border-zinc-100">
-                      <td className="py-2 text-zinc-600">Salt</td>
-                      <td className="py-2 text-right text-zinc-900">{product.nutriments?.salt_100g || 0} g</td>
+                    <tr className="group hover:bg-zinc-50/50 transition-colors">
+                      <td className="py-3 text-zinc-600">Salt</td>
+                      <td className="py-3 text-right text-zinc-700">{product.nutriments?.salt_100g || 0} g</td>
                     </tr>
-                     <tr>
-                      <td className="py-2 text-zinc-600">Fiber</td>
-                      <td className="py-2 text-right text-zinc-900">{product.nutriments?.fiber_100g || 0} g</td>
+                     <tr className="group hover:bg-zinc-50/50 transition-colors">
+                      <td className="py-3 text-zinc-600">Fiber</td>
+                      <td className="py-3 text-right text-zinc-700">{product.nutriments?.fiber_100g || 0} g</td>
                     </tr>
                   </tbody>
                 </table>

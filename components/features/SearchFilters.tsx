@@ -53,24 +53,24 @@ export function SearchFilters({
   };
 
   return (
-    <div className="space-y-4 rounded-xl border border-emerald-100 bg-white/80 p-6 shadow-sm backdrop-blur-sm">
-      <form onSubmit={handleSearch} className="flex flex-col gap-4 md:flex-row">
-        <div className="relative flex-1">
-          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-            {searchType === 'name' ? <Search size={18} /> : <Barcode size={18} />}
+    <div className="relative z-10 space-y-4 rounded-3xl border border-zinc-100 bg-white/90 p-5 shadow-xl shadow-zinc-200/50 backdrop-blur-xl transition-all md:sticky md:top-20">
+      <form onSubmit={handleSearch} className="flex flex-col gap-3 md:flex-row">
+        <div className="relative flex-1 group">
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 group-focus-within:text-emerald-600 transition-colors">
+            {searchType === 'name' ? <Search size={20} /> : <Barcode size={20} />}
           </div>
           <Input
             type="text"
-            placeholder={searchType === 'name' ? "Search products..." : "Enter barcode..."}
+            placeholder={searchType === 'name' ? "Search 2M+ products..." : "Scan or enter barcode..."}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="pl-10"
+            className="h-12 border-zinc-200 bg-white/50 pl-10 text-base shadow-sm hover:border-emerald-300 focus-visible:ring-emerald-500 transition-all rounded-xl"
           />
           {query && (
             <button
               type="button"
               onClick={() => { setQuery(''); onSearch('', searchType); }}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+              className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-1 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600 transition-colors"
             >
               <X size={16} />
             </button>
@@ -80,45 +80,49 @@ export function SearchFilters({
             <Select
                 value={searchType}
                 onChange={(e) => setSearchType(e.target.value as 'name' | 'barcode')}
-                className="w-[130px]"
+                className="h-12 w-[140px] border-zinc-200 bg-white/50 font-medium rounded-xl hover:border-emerald-300 focus:ring-emerald-500"
             >
-                <option value="name">Name</option>
+                <option value="name">Product Name</option>
                 <option value="barcode">Barcode</option>
             </Select>
-            <Button type="submit">Search</Button>
+            <Button type="submit" className="h-12 bg-emerald-600 px-8 text-base font-semibold hover:bg-emerald-700 rounded-xl shadow-lg shadow-emerald-200">
+                Search
+            </Button>
         </div>
       </form>
 
-      <div className="flex flex-col gap-4 md:flex-row md:items-center">
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Filter size={16} />
-          <span>Filters:</span>
+      <div className="flex flex-col gap-3 md:flex-row md:items-center justify-between border-t border-zinc-100 pt-3">
+        <div className="flex items-center gap-2 text-sm font-medium text-zinc-500">
+          <Filter size={16} className="text-emerald-600" />
+          <span>Refine results:</span>
         </div>
         
-        <Select
-          value={initialCategory}
-          onChange={(e) => onCategoryChange(e.target.value)}
-          className="w-full md:w-[200px]"
-          disabled={loadingCategories}
-        >
-          <option value="">All Categories</option>
-          {categories.map((cat) => (
-            <option key={cat.id} value={cat.id}>
-              {cat.name}
-            </option>
-          ))}
-        </Select>
+        <div className="flex flex-col gap-3 sm:flex-row w-full md:w-auto">
+            <Select
+            value={initialCategory}
+            onChange={(e) => onCategoryChange(e.target.value)}
+            className="h-10 w-full md:w-[220px] rounded-lg border-zinc-200 bg-white/50 text-sm"
+            disabled={loadingCategories}
+            >
+            <option value="">All Categories</option>
+            {categories.map((cat) => (
+                <option key={cat.id} value={cat.id}>
+                {cat.name}
+                </option>
+            ))}
+            </Select>
 
-        <Select
-          value={initialSort}
-          onChange={(e) => onSortChange(e.target.value)}
-          className="w-full md:w-[200px]"
-        >
-          <option value="name_asc">Name (A-Z)</option>
-          <option value="name_desc">Name (Z-A)</option>
-          <option value="grade_asc">Nutrition Grade (Best First)</option>
-          <option value="grade_desc">Nutrition Grade (Worst First)</option>
-        </Select>
+            <Select
+            value={initialSort}
+            onChange={(e) => onSortChange(e.target.value)}
+            className="h-10 w-full md:w-[220px] rounded-lg border-zinc-200 bg-white/50 text-sm"
+            >
+            <option value="name_asc">Name (A-Z)</option>
+            <option value="name_desc">Name (Z-A)</option>
+            <option value="grade_asc">Nutrition Grade (A to E)</option>
+            <option value="grade_desc">Nutrition Grade (E to A)</option>
+            </Select>
+        </div>
       </div>
     </div>
   );
