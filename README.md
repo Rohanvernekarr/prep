@@ -1,5 +1,13 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+
+here i have used next js with react,typescript for server-side rendering and used tailwind CSS for styling  and Integrated the Open Food Facts API.
+I have implemented dual search modes  name based and Barcode based.
+Built a dynamic filtering system for categories and real-time sorting for Nutrition Grades (A-E) and product names.
+I implemented a "Load More" stratege to provide  better ux.
+responsive for all type of screens.
+used react hooks for state management because of this small scale app.
+
 ## Getting Started
 
 First, run the development server:
