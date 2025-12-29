@@ -1,13 +1,16 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { ShoppingBag } from 'lucide-react';
 import { Product } from '@/lib/types';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
+import { useCart } from '@/context/CartContext';
 
 interface ProductCardProps {
   product: Product;
 }
 
 export function ProductCard({ product }: ProductCardProps) {
+  const { addToCart } = useCart();
   const grade = product.nutrition_grades?.toUpperCase() || '?';
   
   const gradeColors: Record<string, string> = {
@@ -39,6 +42,16 @@ export function ProductCard({ product }: ProductCardProps) {
           <div className={`absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-white shadow-lg ring-2 ring-white/50 backdrop-blur-sm ${gradeColors[grade] || gradeColors['?']}`}>
             {grade}
           </div>
+          <button
+             onClick={(e) => {
+               e.preventDefault();
+               addToCart(product);
+             }}
+             className="absolute bottom-4 right-4 flex h-10 w-10 translate-y-4 items-center justify-center rounded-full bg-emerald-600 text-white opacity-0 shadow-lg transition-all duration-300 hover:bg-emerald-700 group-hover:translate-y-0 group-hover:opacity-100"
+             title="Add to Cart"
+          >
+             <ShoppingBag size={18} />
+          </button>
         </div>
         <CardHeader className="p-5 pb-2">
           <h3 className="line-clamp-2 text-lg font-bold tracking-tight text-zinc-900 group-hover:text-emerald-700 transition-colors">

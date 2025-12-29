@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import Link from 'next/link';
 import { ArrowLeft, Check, AlertCircle } from 'lucide-react';
+import { AddToCartButton } from '@/components/features/AddToCartButton';
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -88,6 +89,9 @@ export default async function ProductPage({ params }: PageProps) {
           <div>
             <h1 className="text-3xl font-bold text-zinc-900">{product.product_name}</h1>
             <p className="mt-2 text-lg text-zinc-500">{product.categories}</p>
+            <div className="mt-6">
+                <AddToCartButton product={product} />
+            </div>
           </div>
 
           <Card className="border-zinc-200">
